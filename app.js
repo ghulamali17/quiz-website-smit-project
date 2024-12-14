@@ -139,6 +139,7 @@ let data = [
 let main = document.querySelector(".main");
 let optionDiv = document.querySelector(".optionDiv");
 let questionEle = document.querySelector(".questionEle");
+let nextBtn=document.querySelector(".next-btn");
 
 let count = 0;
 
@@ -157,9 +158,10 @@ function showQuestion() {
 function nextQuestion() {
   count++;
   if (count >= data.length) {
-    alert("End");
+    nextBtn.disabled = true; 
     return;
   }
+  
   showQuestion();
 }
 
