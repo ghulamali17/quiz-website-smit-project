@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.question-container{
+    width: 400px;
+    height: 400px;
+    background-color: rgb(224, 75, 75);
+    padding: 20px;
+}
