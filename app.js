@@ -163,6 +163,9 @@ function nextQuestion() {
   showQuestion();
 }
 
+function reset(){
+  location.reload();
+}
 document.addEventListener("DOMContentLoaded", () => {
   showQuestion();
 });
