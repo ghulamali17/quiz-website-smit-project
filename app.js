@@ -136,13 +136,13 @@ let data = [
   },
 ];
 
-let main = document.querySelector(".main");
-let optionDiv = document.querySelector(".optionDiv");
 let questionEle = document.querySelector(".questionEle");
+let optionDiv = document.querySelector(".optionDiv");
 let nextBtn = document.querySelector(".next-btn");
 
 let count = 0;
 let score = 0;
+
 function showQuestion() {
   const currQuestion = data[count];
   questionEle.innerHTML = `${count + 1}. ${currQuestion.question}`;
@@ -186,6 +186,7 @@ function nextQuestion() {
 function reset() {
   location.reload();
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   showQuestion();
 });
