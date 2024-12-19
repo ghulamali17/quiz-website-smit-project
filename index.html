@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SMIT Quiz App</title>
+    <title>Quiz app</title>
+    <link rel="icon" href="./images/favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="./style/index.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -14,14 +15,50 @@
   </head>
   <body>
     <main>
-      <img src="./Images/smit logo.png" alt="logo" class="img-fluid" />
-      <h1>Welcome to SMIT Quiz App</h1>
-      <a href="./quiz.html" class="start-btn">Start Quiz</a>
+      <div class="form">
+        <form action="" onsubmit="valid(event)">
+          <h3>Log In</h3>
+          <hr />
+          <label for="username">Username</label><br />
+          <input
+            type="text"
+            autocomplete="off"
+            name="username"
+            id="username"
+            placeholder="Enter your name"
+            oninput="validname(event)"
+          /><br />
+          <span id="userspan"></span><br />
+          <label for="rollno">Roll No.</label><br />
+          <input
+            type="text"
+            autocomplete="off"
+            name="rollno"
+            id="rollno"
+            placeholder="Enter your Roll-no"
+            maxlength="4"
+          /><br />
+          <span id="ID-span"></span><br />
+          <label for="class">Class</label><br />
+          <input
+            type="text"
+            autocomplete="off"
+            name="class"
+            placeholder="Enter your class"
+            id="class"
+          /><br />
+          <span id="rollnospan"></span><br /><br />
+          <input type="submit" class="submit" value="Submit" />
+        </form>
+      </div>
+      <div id="hide">
+        <img src="./images/logo.png" alt="logo" class="img-fluid" /><br />
+        <h1>Welcome to SMIT Quiz App</h1>
+        <a href="./quiz.html" class="start-btn">Start Quiz</a>
+      </div>
     </main>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
   </body>
+  <script src="./scripts/index.js">
+
+  </script>
 </html>
