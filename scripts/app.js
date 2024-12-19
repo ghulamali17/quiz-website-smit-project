@@ -136,7 +136,6 @@ let data = [
   },
 ];
 
-
 const lineLength = 100 / data.length;
 
 let questionEle = document.querySelector(".questionEle");
@@ -304,16 +303,16 @@ function timer() {
   countdown = setInterval(() => {
     timeLeft--;
     time.textContent = timeLeft;
-
     if (timeLeft <= 0) {
       clearInterval(countdown);
       time.textContent = "Time's up! Move to next question";
       popUp.style.visibility = "visible";
+      validity.innerText = "Sorry!";
+
       const buttons = optionDiv.querySelectorAll("button");
       for (let i = 0; i < buttons.length; i++) {
         buttons[i].disabled = true;
       }
-      
     }
   }, 1000);
 }
