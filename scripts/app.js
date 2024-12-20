@@ -136,20 +136,24 @@ let data = [
   },
 ];
 
+// Calculating the percentage width for the progress bar based on the number of questions here
 const lineLength = 100 / data.length;
+
+let body = document.getElementsByTagName("body")[0];
+
+let QuesHead = document.getElementById("Ques-Head");
+let line = document.getElementById("line");
+let time = document.getElementById("time");
 
 let questionEle = document.querySelector(".questionEle");
 let optionDiv = document.querySelector(".optionDiv");
 let nextBtn = document.querySelector(".next-btn");
 let showResult = document.querySelector(".showResult");
 
-let modalPage = document.querySelector(".modal-page");
+let validity = document.getElementById("alert");
+let popUp = document.getElementById("pop-up");
 
-let body = document.getElementsByTagName("body")[0];
-
-let QuesHead = document.getElementById("Ques-Head");
-let line = document.getElementById("line");
-
+// Min,score and max progress bar elements
 let min = document.getElementById("min");
 min.innerText = "Min: 0%";
 
@@ -159,8 +163,6 @@ barScore.innerText = "Score: 0%";
 let max = document.getElementById("max");
 max.innerText = `Max: ${100}%`;
 
-let validity = document.getElementById("alert");
-let popUp = document.getElementById("pop-up");
 popUp.style.visibility = "hidden";
 
 let minLine = document.getElementById("minline");
@@ -171,12 +173,12 @@ scoreLine.style.width = "0%";
 maxLine.style.width = `100%`;
 
 let restart = document.getElementById("restart");
-
+restart.style.display = "none";
 let count = 0;
 let score = 0;
 let num = 1;
-let time = document.getElementById("time");
 
+// Show Question Logic Here
 function showQuestion() {
   const currQuestion = data[count];
   questionEle.innerHTML = ` ${currQuestion.question}`;
@@ -185,6 +187,7 @@ function showQuestion() {
   QuesHead.innerText = `Question ${num > 9 ? num : "0" + num}/${data.length}`;
   num++;
 
+  // Creating Option Buttons
   optionDiv.innerHTML = "";
   for (let i = 0; i < currQuestion.options.length; i++) {
     const option = document.createElement("button");
@@ -192,17 +195,18 @@ function showQuestion() {
     option.classList.add("buttons");
     option.textContent = currQuestion.options[i];
 
+    //  Validating answer here
     option.addEventListener("click", (e) => {
       if (e.target.textContent === currQuestion.answer) {
         e.target.style.backgroundColor = "transparent";
         e.target.style.border = "1px solid rgb(38, 171, 171)";
         restart.style.display = "none";
-        e.target.style.color = "white";
+     
         validity.innerText = "Correct!";
         popUp.style.visibility = "visible";
         score++;
-        min.innerText = `Min:${lineLength * score}%`;
-        minLine.style.width = `${lineLength * score}%`;
+        min.innerText = `Min:${(lineLength * score).toFixed(1)}%`;
+        minLine.style.width = `${(lineLength * score).toFixed(1)}%`;
         barScore.innerText = `Score: ${((score / (num - 1)) * 100).toFixed(
           1
         )}%`;
@@ -218,7 +222,6 @@ function showQuestion() {
       } else {
         e.target.style.backgroundColor = "transparent";
         e.target.style.border = "1px solid red";
-        e.target.style.color = "white";
         validity.innerText = "Sorry!";
         restart.style.display = "none";
 
@@ -237,7 +240,7 @@ function showQuestion() {
           100
         ).toFixed(1)}%`;
       }
-
+      //  disabling all option btns after user answer click here
       const buttons = optionDiv.querySelectorAll("button");
       for (let j = 0; j < buttons.length; j++) {
         buttons[j].disabled = true;
@@ -248,10 +251,12 @@ function showQuestion() {
   }
 }
 
+// Reset Logic
 function reset() {
   location.reload();
 }
 
+// Next Question Logic Here
 function nextQuestion(e) {
   restart.style.display = "none";
   time.textContent = "";
@@ -260,12 +265,11 @@ function nextQuestion(e) {
   console.log(num, score);
   if (num == data.length) {
     e.target.innerText = "Show Result";
-    console.log(num, score);
+
     restart.style.display = "none";
   }
   if (count < data.length) {
     popUp.style.visibility = "hidden";
-    console.log(num, score);
     restart.style.display = "none";
     showQuestion();
   } else {
@@ -273,7 +277,7 @@ function nextQuestion(e) {
     body.setAttribute("class", "flex");
     showResult.innerHTML = `<div class="result-page">
     <h1>Result</h1>
-    <img src="./images/award.webp" width="200px" height="auto" />
+    <img src="./realistic-golden-trophy-ai-generative-free-png.webp" width="200px" height="auto" />
     <h2>${
       score > data.length / 2 ? "Congratulations!" : "Better Luck Next Time"
     }</h2>
@@ -291,23 +295,33 @@ function nextQuestion(e) {
     console.log(num, score);
   }
 }
-// Timer Functions
+
+// Timer Function Here
 let countdown;
 let timeLeft = 30;
 function timer() {
   timeLeft = 30;
-  time.innerHTML = timeLeft;
+  time.innerHTML = `Time Left: ${timeLeft}s`;
 
   clearInterval(countdown);
 
   countdown = setInterval(() => {
     timeLeft--;
-    time.textContent = timeLeft;
+    time.textContent = `Time Left: ${timeLeft}s`;
     if (timeLeft <= 0) {
       clearInterval(countdown);
       time.textContent = "Time's up! Move to next question";
       popUp.style.visibility = "visible";
-      validity.innerText = "Sorry!";
+      validity.innerText = "Time's up!";
+
+      maxLine.style.width = `${(
+        ((score + (data.length - (num - 1))) / data.length) *
+        100
+      ).toFixed(1)}%`;
+      max.innerText = `Max: ${(
+        ((score + (data.length - (num - 1))) / data.length) *
+        100
+      ).toFixed(1)}%`;
 
       const buttons = optionDiv.querySelectorAll("button");
       for (let i = 0; i < buttons.length; i++) {

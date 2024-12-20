@@ -1,7 +1,6 @@
 body {
   width: 100%;
   background: radial-gradient(circle, #0f0c29, #021d31, #062141);
-
   height: 100vh;
   font-family: "Arial", sans-serif;
   display: flex;
@@ -99,7 +98,7 @@ button:disabled {
 .pop-up h2 {
   font-size: 40px;
 }
-.abc {
+.progress-bar {
   height: 30px;
   border-radius: 5px;
   width: 100%;
