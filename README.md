@@ -1,7 +1,5 @@
 # SMIT Quiz App 📝
 
-The **SMIT Quiz App** is a fully dynamic quiz application to test student knowledge.
-
 ## Features 🌟
 
 - Student form to collect basic information.
