@@ -195,13 +195,13 @@ function showQuestion() {
     option.classList.add("buttons");
     option.textContent = currQuestion.options[i];
 
-    //  Validating answer here
+    //event listener to validate the answer and update prograss bar accordingly
     option.addEventListener("click", (e) => {
       if (e.target.textContent === currQuestion.answer) {
         e.target.style.backgroundColor = "transparent";
         e.target.style.border = "1px solid rgb(38, 171, 171)";
         restart.style.display = "none";
-     
+
         validity.innerText = "Correct!";
         popUp.style.visibility = "visible";
         score++;
@@ -240,7 +240,7 @@ function showQuestion() {
           100
         ).toFixed(1)}%`;
       }
-      //  disabling all option btns after user answer click here
+      //  disabling all  option buttons after user answer click
       const buttons = optionDiv.querySelectorAll("button");
       for (let j = 0; j < buttons.length; j++) {
         buttons[j].disabled = true;
@@ -256,44 +256,43 @@ function reset() {
   location.reload();
 }
 
-// Next Question Logic Here
+// Next Question Function
 function nextQuestion(e) {
   restart.style.display = "none";
   time.textContent = "";
   timer();
   count++;
-  console.log(num, score);
   if (num == data.length) {
     e.target.innerText = "Show Result";
-
     restart.style.display = "none";
   }
+
   if (count < data.length) {
     popUp.style.visibility = "hidden";
     restart.style.display = "none";
     showQuestion();
   } else {
-    showResult.innerText = "";
-    body.setAttribute("class", "flex");
-    showResult.innerHTML = `<div class="result-page">
-    <h1>Result</h1>
-    <img src="./realistic-golden-trophy-ai-generative-free-png.webp" width="200px" height="auto" />
-    <h2>${
-      score > data.length / 2 ? "Congratulations!" : "Better Luck Next Time"
-    }</h2>
-    <p>You answered ${score} out of ${
-      data.length
-    } questions correctly!<br/> Your percentage is ${(
-      (score / data.length) *
-      100
-    ).toFixed(0)}%</p>
-    <button onclick="reset()" class="reset-btn" id="restart">Restart Quiz</button>
-    </div>`;
-
-    e.target.style.display = "none";
-    restart.style.display = "inline-block";
-    console.log(num, score);
+    showResultPage(e);
   }
+}
+
+// Show Result Page Logic
+function showResultPage(e) {
+  showResult.innerText = "";
+  body.setAttribute("class", "flex");
+  showResult.innerHTML = `
+    <div class="result-page">
+      <h1>Result</h1>
+      <img src="../images/award.webp" width="200px" height="auto" />
+      <h2>${
+        score > data.length / 2 ? "Congratulations!" : "Better Luck Next Time"
+      }</h2>
+      <p>You answered ${score} out of ${data.length} questions correctly!<br/> 
+      Your percentage is ${((score / data.length) * 100).toFixed(0)}%</p>
+      <button onclick="reset()" class="reset-btn" id="restart">Restart Quiz</button>
+    </div>`;
+  e.target.style.display = "none";
+  restart.style.display = "inline-block";
 }
 
 // Timer Function Here

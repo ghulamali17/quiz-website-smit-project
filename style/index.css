@@ -22,10 +22,6 @@ main {
   justify-content: center;
   flex-direction: column;
 }
-main #hide {
-  text-align: center;
-  display: none;
-}
 
 main img {
   width: 20rem;
@@ -53,11 +49,7 @@ main img {
 main a {
   text-decoration: none;
 }
-@media (max-width: 786px) {
-  main h1 {
-    font-size: 24px;
-  }
-}
+
 .form {
   width: 300px;
   height: auto;
@@ -71,9 +63,9 @@ main a {
   text-align: center;
 }
 
-#class,
+#section,
 #rollno,
-#username {
+#email {
   background-color: transparent;
   border: 1px solid aqua;
   color: white;
@@ -98,10 +90,16 @@ main a {
   background-color: transparent;
   transform: translateY(-2px);
 }
-#userspan {
+#emailErr,
+#rollNoErr {
   color: red;
-  font-size: x-small;
+  font-size: 20px;
 }
 .red {
   border: 1px solid red;
+}
+@media (max-width: 786px) {
+  main h1 {
+    font-size: 24px;
+  }
 }

@@ -1,56 +1,65 @@
-var userdata = [];
-var hide = document.getElementById("hide");
-hide.style.display = "none";
-var username = document.getElementById("username");
+var email = document.getElementById("email");
 var userSpan = document.getElementById("userspan");
-var grade = document.getElementById("class");
+var section = document.getElementById("section");
 var rollNo = document.getElementById("rollno");
+let flag = true;
 
+// Form Submit
 function valid(e) {
+  flag = true;
   e.preventDefault();
 
-  if (username.value == "" || grade.value == "" || rollNo.value == "")
-    return alert("Fill all the fields!");
-  for (let i = 0; i < userdata.length; i++) {
-    if (rollno.value == userdata[i].rollNo) {
-      if (username.value != userdata[i].username) {
-        alert("Enter correct username or roll-No");
-      }
-      return;
-    }
+  if (email.value === "" || section.value === "" || rollNo.value === "") {
+    alert("Fill all the fields!");
+    flag = false;
   }
-  // checkData();
-  userdata2 = {
-    username: username.value,
-    grade: grade.value,
-    rollNo: rollNo.value,
-  };
-  localStorage.setItem(`User ${rollNo.value}`, JSON.stringify(userdata2));
-  userdata = [
-    ...userdata,
-    {
-      username: username.value,
-      grade: grade.value,
-      rollNo: rollNo.value,
-    },
-  ];
-  console.log(userdata);
-  username.value = "";
-  grade.value = "";
-  rollNo.value = "";
-  e.target.parentElement.style.display = "none";
-  hide.style.display = "block";
+
+  checkRollNo();
+  checkEmail();
+
+  if (flag) {
+    window.location.href = "welcome.html";
+  }
 }
 
-function validname(e) {
-  if (username.value.length < 3 && username.value.length != 0) {
-    userSpan.innerText = "Username must contain more than 3 Char";
-    username.setAttribute("class", "red");
-  } else if (username.value.length == 0) {
-    userSpan.innerText = "";
-    username.setAttribute("class", "black");
+// Check Email With Regex
+function checkEmail() {
+  const emailErr = document.getElementById("emailErr");
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!email.value.match(emailRegex)) {
+    if (email.value === "") {
+      emailErr.innerHTML = "Please Enter Your Email.";
+    } else {
+      emailErr.innerHTML = "Please enter a valid email.";
+    }
+    email.classList.add("red");
+    email.classList.remove("black");
+    flag = false;
   } else {
-    userSpan.innerText = "";
-    username.setAttribute("class", "black");
+    emailErr.innerHTML = "";
+    email.classList.add("black");
+    email.classList.remove("red");
+  }
+}
+
+// Check Roll No With Regex
+function checkRollNo() {
+  const rollNoErr = document.getElementById("rollNoErr");
+  const rollNoregex = /^\d+$/;
+
+  if (!rollNo.value.match(rollNoregex)) {
+    if (rollNo.value === "") {
+      rollNoErr.innerHTML = "Please Enter Your Roll No.";
+    } else {
+      rollNoErr.innerHTML = "Only Numbers Allowed.";
+    }
+    rollNo.classList.add("red");
+    rollNo.classList.remove("black");
+    flag = false;
+  } else {
+    rollNoErr.innerHTML = "";
+    rollNo.classList.add("black");
+    rollNo.classList.remove("red");
   }
 }

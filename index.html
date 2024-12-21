@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Quiz app</title>
+    <title>SMIT Quiz App</title>
     <link rel="icon" href="./images/favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="./style/index.css" />
     <link
@@ -19,18 +19,21 @@
         <form action="" onsubmit="valid(event)">
           <h3>Log In</h3>
           <hr />
-          <label for="username">Username</label><br />
+          <label for="email">Email</label><br />
           <input
             type="text"
             autocomplete="off"
-            name="username"
-            id="username"
-            placeholder="Enter your name"
-            oninput="validname(event)"
-          /><br />
-          <span id="userspan"></span><br />
+            name="email"
+            id="email"
+            placeholder="Enter your email"
+            oninput="checkEmail(event)"
+          />
+          <br />
+          <span id="emailErr"></span><br />
+
+
           <label for="rollno">Roll No.</label><br />
-          <input
+          <input oninput="checkRollNo(event)"
             type="text"
             autocomplete="off"
             name="rollno"
@@ -38,27 +41,21 @@
             placeholder="Enter your Roll-no"
             maxlength="4"
           /><br />
-          <span id="ID-span"></span><br />
-          <label for="class">Class</label><br />
+          <span id="rollNoErr"></span><br />
+          <label for="class">Section</label><br />
           <input
             type="text"
             autocomplete="off"
-            name="class"
-            placeholder="Enter your class"
-            id="class"
+            name="section"
+            placeholder="Section"
+            id="section"
           /><br />
           <span id="rollnospan"></span><br /><br />
           <input type="submit" class="submit" value="Submit" />
         </form>
       </div>
-      <div id="hide">
-        <img src="./images/logo.png" alt="logo" class="img-fluid" /><br />
-        <h1>Welcome to SMIT Quiz App</h1>
-        <a href="./quiz.html" class="start-btn">Start Quiz</a>
-      </div>
+     
     </main>
   </body>
-  <script src="./scripts/index.js">
-
-  </script>
+  <script src="./scripts/index.js"></script>
 </html>

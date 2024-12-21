@@ -4,6 +4,7 @@ body {
   height: 100vh;
   font-family: "Arial", sans-serif;
   display: flex;
+  position: relative;
   flex-direction: column;
 }
 .question-container {
@@ -150,6 +151,12 @@ button:disabled {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+#Ques-Head {
+  font-size: 30px;
+}
+#time{
+  margin-left: 40px;
 }
 .result-page {
   color: white;
