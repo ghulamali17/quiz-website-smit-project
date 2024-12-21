@@ -180,6 +180,4 @@ button:disabled {
   display: flex;
   justify-content: space-between;
 }
-#time {
-  margin: auto 0px;
-}
+
