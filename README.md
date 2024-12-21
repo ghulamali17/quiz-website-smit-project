@@ -1,5 +1,6 @@
 # SMIT Quiz App 📝
 
+Link: https://quiz-smit-app.netlify.app/
 ## Features 🌟
 
 - Student form to collect basic information.
